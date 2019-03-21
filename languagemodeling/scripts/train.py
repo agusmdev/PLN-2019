@@ -18,11 +18,12 @@ import pickle
 
 from nltk.corpus import gutenberg
 
-from languagemodeling.ngram import NGram
-
+from languagemodeling.ngram import NGram, AddOneNGram
+from nltk.corpus.reader.plaintext import PlaintextCorpusReader
 
 models = {
     'ngram': NGram,
+    'add-one-ngram': AddOneNGram,
 }
 
 
@@ -30,9 +31,7 @@ if __name__ == '__main__':
     opts = docopt(__doc__)
 
     # load the data
-    # WORK HERE!! LOAD YOUR TRAINING CORPUS
-    sents = gutenberg.sents(['austen-emma.txt', 'austen-sense.txt'])
-
+    sents = PlaintextCorpusReader(".", "corpus.txt").sents()
     # train the model
     n = int(opts['-n'])
     model_class = models[opts['-m']]
