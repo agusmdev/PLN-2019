@@ -19,7 +19,7 @@ Se implementaron las funciones necesarias para el correcto funcionamiento del mo
 
 Dado un modelo ya entrenado, podemos generar oraciones basadas en las probabilidades de que se genere una palabra, dadas las n-1 palabras anteriores. Los siguientes son ejemplos de oraciones generadas con modelos de unigramas, bigramas, trigramas y cuatrigramas:
 
-* Unigrama:
+* __Unigrama:__
 
  * los . , tienen dedos por
 
@@ -34,7 +34,7 @@ Dado un modelo ya entrenado, podemos generar oraciones basadas en las probabilid
  
  * vuestras allí ser víctima príncipe los ... 
 
-* Bigrama:
+* __Bigrama:__
  * — dijo Meñique tuviera un cinturón . 
 
  * Al fondo del arroyo para ver esa pesada . 
@@ -45,7 +45,7 @@ Dado un modelo ya entrenado, podemos generar oraciones basadas en las probabilid
 
  * El Sueño del mar salado — Entonces a los edificios que tú . 
 
-* Trigrama:
+* __Trigrama:__
 
  * Jaime se estiró para ver esto — les gritó Arya . 
 
@@ -57,7 +57,7 @@ Dado un modelo ya entrenado, podemos generar oraciones basadas en las probabilid
 
  * Rápida como una capa gruesa con cuello de Prendahl y Sallor el Calvo y Prendahl na Ghezn rodaron por las ventanas altas y puntiagudas daban al callejón en el mundo dice — respondió como hacía cada vez más , tanto que no se parecían un recuerdo de aquel primer brindis e hizo una mueca a Jon fuera de la montaña — dijo —. 
 
-* Cuatrigrama:
+* __Cuatrigrama:__
 
  * Esos pentoshis se beberían sus orines si fueran tintos . 
 
