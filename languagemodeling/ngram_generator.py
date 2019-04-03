@@ -11,12 +11,10 @@ class NGramGenerator(object):
         self._n = n = model._n
         # compute the probabilities
         probs = defaultdict(dict)
-        # WORK HERE!!
 
         # sort in descending order for efficient sampling
 
         sorted_probs = {}
-        # WORK HERE!!
         ngrams = [ngram for ngram in model._count.keys() if len(ngram) == n]
 
         for ngram in ngrams:
@@ -65,8 +63,11 @@ class NGramGenerator(object):
             prev_tokens = tuple()
 
         tokens = self._sorted_probs[prev_tokens]
+
         elements = [element for element, probability in tokens]
-        probabilities = [probability for element, probability in tokens]
-        choice = np.random.choice(elements, 1, probabilities)
+
+        probabilities = np.array([probability for element, probability in tokens])
+
+        choice = np.random.choice(a=elements, p=probabilities)
 
         return "".join(choice)

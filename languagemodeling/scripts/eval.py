@@ -12,7 +12,6 @@ from docopt import docopt
 import pickle
 import math
 
-from languagemodeling.ngram import NGram
 from nltk.corpus.reader.plaintext import PlaintextCorpusReader
 
 
@@ -26,11 +25,9 @@ if __name__ == '__main__':
     f.close()
 
     # load the data
-    # WORK HERE!! LOAD YOUR EVALUATION CORPUS
     sents = PlaintextCorpusReader(".", "test.txt").sents()
 
     # compute the cross entropy
-    # WORK HERE!!
     log_prob = model.log_prob(sents)
     e = model.cross_entropy(sents)
     p = model.perplexity(sents)
