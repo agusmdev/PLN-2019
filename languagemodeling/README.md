@@ -78,19 +78,19 @@ Para la implementacion de este modelo, heredamos casi todos los métodos de la c
 En este ejercicio se evalúa la perplexity y cross-entropy y log-probability de los modelos con suavizado.
 A continuacion listamos cada modelo para n-grams de tamaño {1,2,3,4} con sus perplexities respectivamente:
 
-* AddOne:
+* __AddOne:__
  * 1479.56
  * 3060.65
  * 19621.81
  * 32981.55
 
-* Interpolated:
+* __Interpolated:__
  * 1614.22
  * 492.78
  * 443.52
  * 439.84
 
-* Backoff:
+* __Backoff:__
  * 1614.22
  * 368.41
  * 316.16
