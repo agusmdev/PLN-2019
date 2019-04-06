@@ -12,7 +12,7 @@ En la notebook create_corpus.ipynb está el procedimiento llevado a cabo para pa
 
 ### Ejercicio 2: Modelo de Ngramas
 
-Se implementaron las funciones necesarias para el correcto funcionamiento del modelo y se agregó una funcion `tag_sentence()` utilizada para agregar _n-1_ "<s>" tags de comienzo de oracion y el tag final de oración "</s>".
+Se implementaron las funciones necesarias para el correcto funcionamiento del modelo y se agregó una funcion `tag_sentence()` utilizada para agregar **n-1** "<s>" tags de comienzo de oracion y el tag final de oración "</s>".
 
 
 ### Ejercicio 3: Generación de texto
