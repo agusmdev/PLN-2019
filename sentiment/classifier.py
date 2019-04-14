@@ -3,13 +3,22 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.svm import LinearSVC
 from sklearn.linear_model import LogisticRegression
-
+from nltk import word_tokenize
+from nltk.corpus import stopwords
+import re
 
 classifiers = {
     'maxent': LogisticRegression,
     'mnb': MultinomialNB,
     'svm': LinearSVC,
 }
+
+
+def clean_tweets(str_):
+    mentions = r'(?:@[^\s]+)'
+    urls = r'(?:https?\://t.co/[\w]+)'
+    str_ = re.sub(mentions, '', str_)
+    return re.sub(urls, '', str_)
 
 
 class SentimentClassifier(object):
@@ -20,7 +29,11 @@ class SentimentClassifier(object):
         """
         self._clf = clf
         self._pipeline = pipeline = Pipeline([
-            ('vect', CountVectorizer()),
+            ('vect', CountVectorizer(tokenizer=word_tokenize,
+                                     binary=True,
+                                     ngram_range=(1, 3),
+                                     preprocessor=clean_tweets,
+                                     stop_words=stopwords.words("spanish"))),
             ('clf', classifiers[clf]()),
         ])
 
@@ -29,3 +42,4 @@ class SentimentClassifier(object):
 
     def predict(self, X):
         return self._pipeline.predict(X)
+
