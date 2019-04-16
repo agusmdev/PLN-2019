@@ -1,5 +1,5 @@
-from sklearn.pipeline import Pipeline
-from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.pipeline import Pipeline, FeatureUnion
+from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.svm import LinearSVC
 from sklearn.linear_model import LogisticRegression
@@ -14,11 +14,28 @@ classifiers = {
 }
 
 
-def clean_tweets(str_):
+def preprocess_tweets(str_):
     mentions = r'(?:@[^\s]+)'
     urls = r'(?:https?\://t.co/[\w]+)'
     str_ = re.sub(mentions, '', str_)
     return re.sub(urls, '', str_)
+
+
+vect = TfidfVectorizer(tokenizer=word_tokenize,
+                       binary=True,
+                       analyzer="char_wb",
+                       ngram_range=(1, 6),
+                       min_df=5,
+                       max_df=0.95,
+                       preprocessor=preprocess_tweets,
+                       stop_words=stopwords.words("spanish"))
+
+vect2 = TfidfVectorizer(tokenizer=word_tokenize,
+                        binary=True,
+                        analyzer="word",
+                        ngram_range=(1, 5),
+                        preprocessor=preprocess_tweets,
+                        stop_words=stopwords.words("spanish"))
 
 
 class SentimentClassifier(object):
@@ -29,11 +46,10 @@ class SentimentClassifier(object):
         """
         self._clf = clf
         self._pipeline = pipeline = Pipeline([
-            ('vect', CountVectorizer(tokenizer=word_tokenize,
-                                     binary=True,
-                                     ngram_range=(1, 3),
-                                     preprocessor=clean_tweets,
-                                     stop_words=stopwords.words("spanish"))),
+            ('feats', FeatureUnion([
+                    ('vect', vect),  # can pass in either a pipeline
+                    ('vect2', vect2),  # or a transformer
+                ])),
             ('clf', classifiers[clf]()),
         ])
 
@@ -42,4 +58,3 @@ class SentimentClassifier(object):
 
     def predict(self, X):
         return self._pipeline.predict(X)
-

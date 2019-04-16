@@ -15,11 +15,13 @@ Options:
                   mnb: Multinomial Bayes
   -o <file>    Output model file.
   -h --help     Show this screen.
+  -a <bool> use augmented data
 """
 from docopt import docopt
 import pickle
 
 from sentiment.tass import InterTASSReader
+from sentiment.new_data import InterTASSAugmented
 from sentiment.baselines import MostFrequent
 from sentiment.classifier import SentimentClassifier
 
@@ -35,8 +37,16 @@ if __name__ == '__main__':
 
     # load corpora
     corpus = opts['-i']
-    reader = InterTASSReader(corpus)
-    X, y = list(reader.X()), list(reader.y())
+    try:
+        if int(opts['-a']):
+            reader = InterTASSAugmented()  # Class to use augmented data
+            X, y = reader.Xy()
+        else:
+            reader = InterTASSReader(corpus)
+            X, y = list(reader.X()), list(reader.y())
+    except TypeError:
+        print("Please pass -a argument {0, 1} if you want to use augmented train data")
+        exit(1)
 
     # train model
     model_type = opts['-m']
