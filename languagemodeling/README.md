@@ -12,14 +12,14 @@ En la notebook create_corpus.ipynb está el procedimiento llevado a cabo para pa
 
 ### Ejercicio 2: Modelo de Ngramas
 
-Se implementaron las funciones necesarias para el correcto funcionamiento del modelo y se agregó una funcion `tag_sentence()` utilizada para agregar _n-1_ __<s>__ tags de comienzo de oracion y el tag final de oración __</s>__.
+Se implementaron las funciones necesarias para el correcto funcionamiento del modelo y se agregó una funcion `tag_sentence()` utilizada para agregar **n-1** "<s>" tags de comienzo de oracion y el tag final de oración "</s>".
 
 
 ### Ejercicio 3: Generación de texto
 
 Dado un modelo ya entrenado, podemos generar oraciones basadas en las probabilidades de que se genere una palabra, dadas las n-1 palabras anteriores. Los siguientes son ejemplos de oraciones generadas con modelos de unigramas, bigramas, trigramas y cuatrigramas:
 
-* Unigrama:
+* __Unigrama:__
 
  * los . , tienen dedos por
 
@@ -34,7 +34,7 @@ Dado un modelo ya entrenado, podemos generar oraciones basadas en las probabilid
  
  * vuestras allí ser víctima príncipe los ... 
 
-* Bigrama:
+* __Bigrama:__
  * — dijo Meñique tuviera un cinturón . 
 
  * Al fondo del arroyo para ver esa pesada . 
@@ -45,7 +45,7 @@ Dado un modelo ya entrenado, podemos generar oraciones basadas en las probabilid
 
  * El Sueño del mar salado — Entonces a los edificios que tú . 
 
-* Trigrama:
+* __Trigrama:__
 
  * Jaime se estiró para ver esto — les gritó Arya . 
 
@@ -57,7 +57,7 @@ Dado un modelo ya entrenado, podemos generar oraciones basadas en las probabilid
 
  * Rápida como una capa gruesa con cuello de Prendahl y Sallor el Calvo y Prendahl na Ghezn rodaron por las ventanas altas y puntiagudas daban al callejón en el mundo dice — respondió como hacía cada vez más , tanto que no se parecían un recuerdo de aquel primer brindis e hizo una mueca a Jon fuera de la montaña — dijo —. 
 
-* Cuatrigrama:
+* __Cuatrigrama:__
 
  * Esos pentoshis se beberían sus orines si fueran tintos . 
 
@@ -78,19 +78,19 @@ Para la implementacion de este modelo, heredamos casi todos los métodos de la c
 En este ejercicio se evalúa la perplexity y cross-entropy y log-probability de los modelos con suavizado.
 A continuacion listamos cada modelo para n-grams de tamaño {1,2,3,4} con sus perplexities respectivamente:
 
-* AddOne:
+* __AddOne:__
  * 1479.56
  * 3060.65
  * 19621.81
  * 32981.55
 
-* Interpolated:
+* __Interpolated:__
  * 1614.22
  * 492.78
  * 443.52
  * 439.84
 
-* Backoff:
+* __Backoff:__
  * 1614.22
  * 368.41
  * 316.16
