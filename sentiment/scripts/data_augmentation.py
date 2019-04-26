@@ -39,7 +39,7 @@ if __name__ == '__main__':
     reader = InterTASSReader('intertass-ES-train-tagged.xml')
     tweets = list(reader.tweets())  # iterador sobre los tweets
 
-    langs = list(LANGUAGES.keys())[:5]
+    langs = list(LANGUAGES.keys())[:15]
     try:
         langs.remove("es")
         langs.remove('zh-cn')

@@ -28,7 +28,10 @@ if __name__ == '__main__':
     f.close()
 
     # load evaluation corpus
+    # if not opts["-f"]:
     corpus = opts['-c']
+    # else:
+        # pass
     reader = InterTASSReader(corpus)
     X, y_true = list(reader.X()), list(reader.y())
 

@@ -38,15 +38,16 @@ if __name__ == '__main__':
     # load corpora
     corpus = opts['-i']
     try:
-        if int(opts['-a']):
-            reader = InterTASSAugmented()  # Class to use augmented data
+        file = opts['-a']
+        if file:
+            reader = InterTASSAugmented(file)  # Class to use augmented data
             X, y = reader.Xy()
         else:
             reader = InterTASSReader(corpus)
             X, y = list(reader.X()), list(reader.y())
     except TypeError:
-        print("Please pass -a argument {0, 1} if you want to use augmented train data")
-        exit(1)
+        raise Exception("Please provide -a argument {0, 1} if you want to use \
+                         augmented train data")
 
     # train model
     model_type = opts['-m']
