@@ -1,13 +1,13 @@
 """Evaulate a Sentiment Analysis model.
 
 Usage:
-  eval.py -c <corpus> -i <file>
+  eval.py -c <corpus> -i <file> -f <bool>
   eval.py -h | --help
 
 Options:
   -c <corpus>   Evaluation corpus.
   -i <file>     Trained model file.
-  -f --final    Use final test set instead of development.
+  -f <bool>   Use final test set instead of development.
   -h --help     Show this screen.
 """
 from docopt import docopt
@@ -20,19 +20,20 @@ from sentiment.tass import InterTASSReader
 
 if __name__ == '__main__':
     opts = docopt(__doc__)
-
     # load model
     filename = opts['-i']
     f = open(filename, 'rb')
     model = pickle.load(f)
     f.close()
-
+    print(opts)
     # load evaluation corpus
-    # if not opts["-f"]:
     corpus = opts['-c']
-    # else:
-        # pass
-    reader = InterTASSReader(corpus)
+
+    if int(opts['-f']):
+        reader = InterTASSReader(filename=corpus,
+                                 res_filename="TASS2017_T1_test_res.qrel")
+    else:
+        reader = InterTASSReader(filename=corpus)
     X, y_true = list(reader.X()), list(reader.y())
 
     # classify

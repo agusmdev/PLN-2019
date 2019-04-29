@@ -7,7 +7,7 @@ from copy import deepcopy
 
 class InterTASSAugmented:
 
-    def __init__(self, file="2augmented_data.pkl", clean=True, ratio=0.9):
+    def __init__(self, file="augmented_data.pkl", clean=True, ratio=0.9):
         self.ratio = ratio
         with open(file, "rb") as f:
             if clean:

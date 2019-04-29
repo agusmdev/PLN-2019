@@ -46,8 +46,7 @@ if __name__ == '__main__':
             reader = InterTASSReader(corpus)
             X, y = list(reader.X()), list(reader.y())
     except TypeError:
-        raise Exception("Please provide -a argument {0, 1} if you want to use \
-                         augmented train data")
+        pass
 
     # train model
     model_type = opts['-m']

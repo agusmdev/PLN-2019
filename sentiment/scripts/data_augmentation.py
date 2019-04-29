@@ -10,8 +10,7 @@ from translator import Translator
 from tqdm import tqdm
 
 
-def heuristic_string(tweets, lang):
-    last_i = 0
+def bulk_translate(tweets, lang):
     str_ = ""
     translated_tweets = []
     news = []
@@ -39,7 +38,7 @@ if __name__ == '__main__':
     reader = InterTASSReader('intertass-ES-train-tagged.xml')
     tweets = list(reader.tweets())  # iterador sobre los tweets
 
-    langs = list(LANGUAGES.keys())[:15]
+    langs = list(LANGUAGES.keys())[:50]
     try:
         langs.remove("es")
         langs.remove('zh-cn')
@@ -51,7 +50,7 @@ if __name__ == '__main__':
     augmented_train = []
     for lang in tqdm(langs):
         try:
-            augmented_train += heuristic_string(tweets, lang)
+            augmented_train += bulk_translate(tweets, lang)
         except:
             pass
     client.quit()
