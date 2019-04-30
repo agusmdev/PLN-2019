@@ -31,6 +31,7 @@ Para ambos casos tenemos que la mejor configuracion de parametros es la siguient
 - **penalty = l2**
 
 La diferente combinacion de parametros se puede ver en las siguientes notebooks:
+
 Logistic Regression: 
 
 https://github.com/agusmdev/PLN-2019/blob/practico2/sentiment/maxent_grid_search.ipynb
