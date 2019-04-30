@@ -74,9 +74,3 @@ class Translator:
 
     def quit(self):
         self.driver.quit()
-
-# if __name__ == '__main__':
-#     a = Translator()
-#     b = a.translate_to("por que no funciona esta mierda?")
-#     print(b)
-#     # a.quit()
