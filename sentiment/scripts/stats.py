@@ -20,8 +20,7 @@ def corpus_statistics(root_path, categories):
         path = os.path.join(root_path, category)
         for corpus in os.listdir(path):
             if corpus.endswith(suffix):
-                statistics[category],
-                statistics[category]["total"] = \
+                statistics[category], statistics[category]["total"] = \
                     count_tweets(os.path.join(path, corpus))
     return dict(statistics)
 

@@ -7,7 +7,7 @@ from copy import deepcopy
 
 class InterTASSAugmented:
 
-    def __init__(self, file="../augmented_data.pkl", clean=True, ratio=0.9):
+    def __init__(self, file="augmented_data.pkl", clean=True, ratio=0.9):
         self.ratio = ratio
         with open(file, "rb") as f:
             if clean:
@@ -16,7 +16,7 @@ class InterTASSAugmented:
                 self.augmented_data = pickle.load(f)
 
     def clean(self, tweets):
-        corpus = "../intertass-ES-train-tagged.xml"
+        corpus = "intertass-ES-train-tagged.xml"
         reader = InterTASSReader(corpus)
         original_tweets = list(reader.tweets())
 

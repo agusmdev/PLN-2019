@@ -25,7 +25,6 @@ if __name__ == '__main__':
     f = open(filename, 'rb')
     model = pickle.load(f)
     f.close()
-    print(opts)
     # load evaluation corpus
     corpus = opts['-c']
 

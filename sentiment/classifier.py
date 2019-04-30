@@ -25,8 +25,8 @@ vect = TfidfVectorizer(tokenizer=word_tokenize,
                        binary=True,
                        analyzer="char_wb",
                        ngram_range=(1, 6),
-                       min_df=5,
-                       max_df=0.95,
+                       min_df=3,
+                       max_df=0.7,
                        preprocessor=preprocess_tweets,
                        stop_words=stopwords.words("spanish"))
 
