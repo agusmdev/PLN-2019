@@ -13,6 +13,7 @@ Options:
 """
 from docopt import docopt
 import pickle
+import dill
 
 from tagging.ancora import SimpleAncoraCorpusReader
 from tagging.baseline import BaselineTagger, BadBaselineTagger
@@ -40,4 +41,5 @@ if __name__ == '__main__':
     filename = opts['-o']
     f = open(filename, 'wb')
     pickle.dump(model, f)
+    # dill.dump(model, f)
     f.close()
