@@ -39,7 +39,6 @@ class BaselineTagger:
         default_tag -- tag for unknown words.
         """
         self.default_tag = default_tag
-        # self.tags_per_word = defaultdict(lambda: defaultdict(int))
         self.tags_per_word = defaultdict(lambda: defaultdict(int))
 
         for sent in tagged_sents:
@@ -72,4 +71,4 @@ class BaselineTagger:
         """Check if a word is unknown for the model.
         word -- the word.
         """
-        return word not in self.most_frequent_tag
+        return not(word in self.most_frequent_tag)
