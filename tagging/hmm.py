@@ -122,9 +122,6 @@ class HMM:
         prob = np.asarray([self.log_out_prob(word, tag) for word, tag in zip(word, y)] + tag_prob)
         return prob.sum()
 
-        # return sum([self.log_out_prob(word, tag)
-        #             for word, tag in zip(word, y)] + [self.tag_log_prob(y)])
-
     def tag(self, sent):
         """Returns the most probable tagging for a sentence.
         sent -- the sentence.
@@ -179,11 +176,10 @@ class ViterbiTagger:
 
                     tags = (prev_tags + (t,))[1:]
 
-                    try:
+                    if tags in pi[k + 1]:
                         current_max_prob, _ = pi[k + 1][tags]
-                    except ValueError:
+                    else:
                         current_max_prob = -inf
-
                     if prob > current_max_prob:
                         pi[k + 1][tags] = (prob, max_path_k + [t])
 
@@ -215,7 +211,7 @@ class MLHMM(HMM):
 
         self._wordtag_count = dict(Counter(wordtags))
 
-        tags = self._tagset
+        tags = [t for s in tagged_sents for _, t in s]
         self._tag_count = dict(Counter(tags))
 
         self._tag_gram_count = defaultdict(float)
