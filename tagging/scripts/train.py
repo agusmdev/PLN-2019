@@ -19,12 +19,14 @@ import dill
 from tagging.ancora import SimpleAncoraCorpusReader
 from tagging.baseline import BaselineTagger, BadBaselineTagger
 from tagging.hmm import MLHMM
+from tagging.classifier import ClassifierTagger
 
 
 models = {
     'badbase': BadBaselineTagger,
     'base': BaselineTagger,
     'mlhmm': MLHMM,
+    'cltagg': ClassifierTagger
 }
 
 
