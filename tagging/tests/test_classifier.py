@@ -66,11 +66,24 @@ class TestFeatureDict(TestCase):
 
         self.assertEqual(feature_dict(sent, 4), fdict)
 
-    def test_feature_dict_n_exception(self):
+    def test_feature_dict_n_and_i(self):
         sent = 'El Gato come pescado .'.split()
-        self.assertRaises(IndexError, feature_dict, sent, 1, len(sent))
-        self.assertRaises(IndexError, feature_dict, sent, 1, 0)
+        fdict1 = {
+            'w': '.',
+            'wu': False,
+            'wt': False,
+            'wd': False,
+            'pw': 'pescado',
+            'nw': '</s>',
+            'pwu': False,
+            'nwu': False,
+            'pwt': False,
+            'nwt': False,
+            'pwd': False,
+            'nwd': False
+        }
 
-    def test_feature_dict_i_exception(self):
-        sent = 'El Gato come pescado .'.split()
-        self.assertRaises(IndexError, feature_dict, sent, len(sent), 3)
+        fdict2 = {'w': '</s>', 'wu': False, 'wt': False, 'wd': False}
+
+        self.assertEqual(feature_dict(sent, 4, 200), fdict1)
+        self.assertEqual(feature_dict([], 0, 0), fdict2)

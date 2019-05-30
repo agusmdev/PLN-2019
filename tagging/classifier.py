@@ -1,12 +1,14 @@
 from sklearn.pipeline import Pipeline
 from sklearn.feature_extraction import DictVectorizer
 from sklearn.svm import LinearSVC
+from sklearn.naive_bayes import MultinomialNB
 from sklearn.linear_model import LogisticRegression
 
 
 classifiers = {
     'lr': LogisticRegression,
     'svm': LinearSVC,
+    'mnb': MultinomialNB,
 }
 
 
@@ -16,6 +18,8 @@ def make_feature_dict(base_feats, nf, sent, i):
         for feature, fun in base_feats.items():
             prev = "p"*n
             nxt = "n"*n
+            if len(sent) <= n + i:
+                continue
             feat_dict[prev + feature] = fun(sent[i-n])
             feat_dict[nxt + feature] = fun(sent[i+n])
 
@@ -27,13 +31,11 @@ def feature_dict(sent, i, n=3):
     if n % 2 != 1:
         n -= 1
 
-    if not(1 <= n < len(sent) or i >= len(sent)):
-        raise IndexError("n must be in [1, len(sent)) and i in [0, len(sent))")
-
-    sent = list(sent) if not isinstance(sent, list) else sent
     if "<s>" not in sent:
-        sent = ["<s>"] + sent + ["</s>"]
+        sent = ["<s>"] + list(sent) + ["</s>"]
         i += 1
+
+    n_feats = int(n/2)
 
     base_feats = {
             "w": str.lower,
@@ -42,8 +44,6 @@ def feature_dict(sent, i, n=3):
             "wd": str.isdigit,
         }
 
-    n_feats = int(n/2)
-
     return make_feature_dict(base_feats, n_feats, sent, i)
 
 
@@ -51,10 +51,11 @@ class ClassifierTagger:
     """Simple and fast classifier based tagger.
     """
 
-    def __init__(self, tagged_sents, clf='lr', n_features=3):
+    def __init__(self, tagged_sents, clf='lr', n_features=5):
         """
         clf -- classifying model, one of 'svm', 'lr' (default: 'lr').
         """
+        self.n_features = n_features
         self.pipeline = Pipeline(
                 steps=[
                     ('vect', DictVectorizer(sparse=True)),
@@ -62,7 +63,6 @@ class ClassifierTagger:
                  ])
 
         self.fit(tagged_sents)
-        self.n_features = n_features
 
     def fit(self, tagged_sents):
         """
