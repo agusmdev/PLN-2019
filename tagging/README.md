@@ -1,4 +1,4 @@
-###Ejercicio 1: Corpus AnCora: Estadísticas de etiquetas POS
+### Ejercicio 1: Corpus AnCora: Estadísticas de etiquetas POS
 
 Los resultados de las estadisticas del corpus ancora son los siguientes:
 
