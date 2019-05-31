@@ -118,7 +118,7 @@ class FastTextClassifier(ClassifierTagger):
         self.clf = clf
         self.pipeline = Pipeline([
             ('feat_u', FeatureUnion([
-                ('fast_text', FasttextDictVectorizer('cc.es.300.bin', ['w', "wu", "wt", "wd"])),
+                ('fast_text', FasttextDictVectorizer('cc.es.300.bin', ['w'])),
                 ('vect', DictVectorizer(sparse=True)),
             ])),
             ('clf', classifiers[clf]())

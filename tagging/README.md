@@ -1,3 +1,18 @@
+###Ejercicio 1: Corpus AnCora: Estadísticas de etiquetas POS
+
+Los resultados de las estadisticas del corpus ancora son los siguientes:
+
+![Screenshot](stats.png)
+
+### Ejercicio 2: Baseline Tagger
+
+Para la implementacion de `BaselineTagger` se cuentan por cada palabra la cantidad de tags asociados.
+
+- Se construye un vocabulario que servirá para verificar si una palabra existe o no.
+- Por cada palabra se ordenan los tags asociados de mayor a menor probabilidad y se extrae el primero (el que tiene mayor probabilidad) y se lo guarda en un diccionario que mappea de palabras a tag de mayor probabilidad.
+- Para asignar un tag a una palabra simplemente se devuelve el tag más frecuente.
+
+
 ### Ejercicio 3: Entrenamiento y Evaluación de Taggers
 
 Se implementó la clase `Evaluator()` para calcular y mostrar los resultados de la evaluacion de un modelo de tagging:
@@ -5,8 +20,15 @@ Los resultados de evaluar el modelo entrenado con `BaselineTagger` son los sigui
 
 ![Screenshot](eval_baseline.png)
 
+### Ejercicio 4: Hidden Markov Models y Algoritmo de Viterbi
+
+- Se implemento Hidden Markov Model en la clase `HMM` cuyos parámetros son las probabilidades de transición entre estados (las etiquetas) y de emisión de símbolos (las palabras).
+- Se implemento tambien el algoritmo de Viterbi, en la clase `ViterbiTagger` que calcula el etiquetado más probable de una oración.
+
 
 ### Ejercicio 5: HMM POS Tagger
+Se implemento un Hidden Markov Model cuyos parámetros se estiman usando Maximum Likelihood sobre un corpus de oraciones etiquetado.
+Se utilizo la clase `MLHMM` que hereda de `HMM` utilizando la mayoria de sus metodos.
 
 Resultados de entrenar MLHMM:
 
