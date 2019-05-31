@@ -87,3 +87,18 @@ siguientes:
     - Accuracy: 78.99%
     - Accuracy for known words: 82.21%
     - Accuracy for unknown words: 49.85%
+
+
+### Ejercicio 7: Clasificador con Word Embeddings fastText
+
+Se implementó un clasificador mixto `FastTextClassifier` utilizando word embeddings fastText y los features utilizados en el clasificador del ejercicio anterior y utilizando el vectorizador provisto en *fasttext.py*.
+Se utilizó un modelo pre-entrenado para el idioma castellano.
+
+El modelo entrenado con este clasificador, tardó un tiempo considerablemente mayor a todos los anteriores, ocupando 2hs para el entrenamiento del modelo.
+
+Los resultados de la evaluación del modelo son los siguientes:
+
+- Tiempo de evaluación: 21s
+- Accuracy: 96.01%
+- Accuracy for known words: 96.98%
+- Accuracy for unknown words: 87.18%
