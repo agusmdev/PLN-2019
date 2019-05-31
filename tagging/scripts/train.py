@@ -9,6 +9,7 @@ Options:
                   badbase: Bad baseline
                   base: Baseline
   -n <int>
+  -c <classifier>
   -o <file>     Output model file.
   -h --help     Show this screen.
 """
@@ -19,14 +20,16 @@ import dill
 from tagging.ancora import SimpleAncoraCorpusReader
 from tagging.baseline import BaselineTagger, BadBaselineTagger
 from tagging.hmm import MLHMM
-from tagging.classifier import ClassifierTagger
+from tagging.classifier import ClassifierTagger, FastTextClassifier
 
 
 models = {
     'badbase': BadBaselineTagger,
     'base': BaselineTagger,
     'mlhmm': MLHMM,
-    'cltagg': ClassifierTagger
+    'cltagg': ClassifierTagger,
+    'fasttext': FastTextClassifier,
+
 }
 
 
@@ -41,6 +44,9 @@ if __name__ == '__main__':
     # train the model
     model_class = models[opts['-m']]
     n = opts["-n"]
+    clf = opts["-c"]
+    if clf:
+        model = model_class(sents, clf=clf)
     if n:
         model = model_class(int(n), sents)
     else:

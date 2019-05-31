@@ -1,9 +1,9 @@
-from sklearn.pipeline import Pipeline
+from sklearn.pipeline import Pipeline, FeatureUnion
 from sklearn.feature_extraction import DictVectorizer
 from sklearn.svm import LinearSVC
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.linear_model import LogisticRegression
-
+from tagging.fasttext import FasttextDictVectorizer
 
 classifiers = {
     'lr': LogisticRegression,
@@ -110,3 +110,17 @@ class ClassifierTagger:
         w -- the word.
         """
         return not(w in self.vocabulary)
+
+
+class FastTextClassifier(ClassifierTagger):
+    def __init__(self, tagged_sents, clf='lr', n_features=5):
+        self.n_features = n_features
+        self.clf = clf
+        self.pipeline = Pipeline([
+            ('feat_u', FeatureUnion([
+                ('fast_text', FasttextDictVectorizer('cc.es.300.bin', ['w', "wu", "wt", "wd"])),
+                ('vect', DictVectorizer(sparse=True)),
+            ])),
+            ('clf', classifiers[clf]())
+        ])
+        self.fit(tagged_sents)
