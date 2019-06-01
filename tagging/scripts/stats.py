@@ -23,53 +23,85 @@ class POSStats:
         """
         # WORK HERE!!
         # COLLECT REQUIRED STATISTICS INTO DICTIONARIES.
+        # Total Sentences
+        self.sents_count = len(tagged_sents)
+        self.word_voc = set()
+        self.tag_voc = set()
+        self.words_count = defaultdict(int)
+        self.tags_count = defaultdict(int)
+        self.words_per_tag = defaultdict(lambda: defaultdict(int))
+        self.tags_per_word = defaultdict(lambda: defaultdict(int))
+
+        for sent in tagged_sents:
+            for word, tag in sent:
+                self.word_voc.add(word)
+                self.tag_voc.add(tag)
+                self.tags_per_word[word][tag] += 1
+                self.words_count[word] += 1
+                self.tags_count[tag] += 1
+                self.words_per_tag[tag][word] += 1
+
+        self._tokencount = sum(map(len, tagged_sents))
 
     def sent_count(self):
         """Total number of sentences."""
         # WORK HERE!!
+        return self.sents_count
 
     def token_count(self):
         """Total number of tokens."""
         # WORK HERE!!
+        return self._tokencount
 
     def words(self):
         """Vocabulary (set of word types)."""
         # WORK HERE!!
+        return self.word_voc
 
     def word_count(self):
         """Vocabulary size."""
         # WORK HERE!!
+        # return self.words_count
+        return len(self.words_count)
 
     def word_freq(self, w):
         """Frequency of word w."""
         # WORK HERE!!
+        return self.words_count[w]
 
     def unambiguous_words(self):
         """List of words with only one observed POS tag."""
         # WORK HERE!!
+        return set([word for word, tag in self.tags_per_word.items()
+                    if len(tag) == 1])
 
     def ambiguous_words(self, n):
         """List of words with n different observed POS tags.
-
         n -- number of tags.
         """
         # WORK HERE!!
+        return set([word for word, tag in self.tags_per_word.items()
+                    if len(tag) == n])
 
     def tags(self):
         """POS Tagset."""
         # WORK HERE!!
+        return self.tag_voc
 
     def tag_count(self):
         """POS tagset size."""
         # WORK HERE!!
+        # return self.tag_voc
+        return len(self.tag_voc)
 
     def tag_freq(self, t):
         """Frequency of tag t."""
         # WORK HERE!!
+        return self.tags_count[t]
 
     def tag_word_dict(self, t):
         """Dictionary of words and their counts for tag t."""
-        return dict(self._tcount[t])
+        return dict(self.words_per_tag[t])
 
 
 if __name__ == '__main__':
@@ -77,7 +109,7 @@ if __name__ == '__main__':
 
     # load the data
     corpus = SimpleAncoraCorpusReader('ancora/ancora-3.0.1es/')
-    sents = corpus.tagged_sents()
+    sents = list(corpus.tagged_sents())
 
     # compute the statistics
     stats = POSStats(sents)
